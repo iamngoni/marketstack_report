@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:relative_scale/relative_scale.dart';
 
+import '../configs/app_colors.dart';
+
 class Loader extends StatelessWidget {
-  const Loader({super.key, this.color = Colors.purple, this.radius = 10});
+  const Loader({super.key, this.color = AppColors.gray, this.radius = 10});
 
   final Color color;
   final double radius;

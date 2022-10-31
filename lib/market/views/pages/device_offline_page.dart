@@ -8,53 +8,55 @@ class DeviceOfflinePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RelativeBuilder(builder: (context, height, width, sy, sx) {
-      return Scaffold(
-        backgroundColor: AppColors.primary,
-        body: SafeArea(
-          child: Container(
-            height: height,
-            width: width,
-            padding: EdgeInsets.symmetric(
-              horizontal: sx(20),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.wifi_off_rounded,
-                  color: Colors.white,
-                  size: sy(30),
-                ),
-                SizedBox(
-                  height: sy(10),
-                ),
-                Text(
-                  "Device Offline",
-                  style: TextStyle(
+    return RelativeBuilder(
+      builder: (context, height, width, sy, sx) {
+        return Scaffold(
+          backgroundColor: AppColors.primary,
+          body: SafeArea(
+            child: Container(
+              height: height,
+              width: width,
+              padding: EdgeInsets.symmetric(
+                horizontal: sx(20),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.wifi_off_rounded,
                     color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                    fontSize: sy(12),
+                    size: sy(30),
                   ),
-                ),
-                SizedBox(
-                  height: sy(3),
-                ),
-                Text(
-                  "Your device is currently offline and not connected to the "
-                  "internet. Please check your connection.",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w400,
-                    fontSize: sy(9.5),
+                  SizedBox(
+                    height: sy(10),
                   ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
+                  Text(
+                    "Device Offline",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                      fontSize: sy(12),
+                    ),
+                  ),
+                  SizedBox(
+                    height: sy(3),
+                  ),
+                  Text(
+                    "Your device is currently offline and not connected to the "
+                    "internet. Please check your connection.",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w400,
+                      fontSize: sy(9.5),
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 }
