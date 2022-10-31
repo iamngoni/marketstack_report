@@ -1,6 +1,6 @@
-import 'package:basalt_assessment/app/app.dart';
-import 'package:basalt_assessment/bootstrap.dart';
+import 'bootstrap.dart';
+import 'market/views/pages/basalt_assessment.dart';
 
 void main() {
-  bootstrap(() => const App());
+  bootstrap(() => const BasaltAssessment());
 }

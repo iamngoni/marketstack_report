@@ -1,13 +1,6 @@
-// Copyright (c) 2022, Very Good Ventures
-// https://verygood.ventures
-//
-// Use of this source code is governed by an MIT-style
-// license that can be found in the LICENSE file or at
-// https://opensource.org/licenses/MIT.
-
-import 'package:basalt_assessment/app/app.dart';
-import 'package:basalt_assessment/bootstrap.dart';
+import 'bootstrap.dart';
+import 'market/views/pages/basalt_assessment.dart';
 
 void main() {
-  bootstrap(() => const App());
+  bootstrap(() => const BasaltAssessment());
 }

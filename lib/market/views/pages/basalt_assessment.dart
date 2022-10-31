@@ -1,24 +1,28 @@
-import 'package:basalt_assessment/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-class App extends StatelessWidget {
-  const App({super.key});
+import '../../../core/configs/app_colors.dart';
+import '../../../core/services/assets_cache.dart';
+import '../../../l10n/l10n.dart';
+import 'market_stack_reports.dart';
+
+class BasaltAssessment extends StatelessWidget {
+  const BasaltAssessment({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // cache all assets
+    cacheAssets(context);
     return MaterialApp(
       theme: ThemeData(
-        appBarTheme: const AppBarTheme(color: Color(0xFF13B9FF)),
-        colorScheme: ColorScheme.fromSwatch(
-          accentColor: const Color(0xFF13B9FF),
-        ),
+        backgroundColor: AppColors.primary,
       ),
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
+      home: const MarketStackReportsPage(),
     );
   }
 }

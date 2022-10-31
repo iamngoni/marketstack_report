@@ -10,6 +10,7 @@ environment:
 dependencies:
   bloc: ^8.1.0
   dartz: ^0.10.0
+  connectivity_plus: ^3.0.2
   dio: ^4.0.6
   equatable: ^2.0.3
   flutter:

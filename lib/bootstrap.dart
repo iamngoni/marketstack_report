@@ -1,15 +1,12 @@
-// Copyright (c) 2022, Very Good Ventures
-// https://verygood.ventures
-//
-// Use of this source code is governed by an MIT-style
-// license that can be found in the LICENSE file or at
-// https://opensource.org/licenses/MIT.
-
 import 'dart:async';
 import 'dart:developer';
+import 'dart:io';
 
-import 'package:bloc/bloc.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'providers.dart';
 
 class AppBlocObserver extends BlocObserver {
   @override
@@ -26,6 +23,17 @@ class AppBlocObserver extends BlocObserver {
 }
 
 Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  if (Platform.isAndroid) {
+    await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+  }
+
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitDown,
+    DeviceOrientation.portraitUp,
+  ]);
+
   FlutterError.onError = (details) {
     log(details.exceptionAsString(), stackTrace: details.stack);
   };
@@ -33,7 +41,10 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   Bloc.observer = AppBlocObserver();
 
   await runZonedGuarded(
-    () async => runApp(await builder()),
+    () async => runApp(MultiBlocProvider(
+      providers: providers,
+      child: await builder(),
+    )),
     (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
   );
 }
