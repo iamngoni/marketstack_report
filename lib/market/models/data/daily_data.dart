@@ -10,11 +10,11 @@ class DailyData {
     required this.low,
     required this.close,
     required this.volume,
-    required this.adjHigh,
-    required this.adjLow,
-    required this.adjClose,
-    required this.adjOpen,
-    required this.adjVolume,
+    this.adjHigh,
+    this.adjLow,
+    this.adjClose,
+    this.adjOpen,
+    this.adjVolume,
     required this.splitFactor,
     required this.dividend,
     required this.symbol,
@@ -31,15 +31,15 @@ class DailyData {
   final double close;
   final double volume;
   @JsonKey(name: "adj_high")
-  final double adjHigh;
+  final double? adjHigh;
   @JsonKey(name: "adj_low")
-  final double adjLow;
+  final double? adjLow;
   @JsonKey(name: "adj_close")
-  final double adjClose;
+  final double? adjClose;
   @JsonKey(name: "adj_open")
-  final double adjOpen;
+  final double? adjOpen;
   @JsonKey(name: "adj_volume")
-  final double adjVolume;
+  final double? adjVolume;
   @JsonKey(name: "split_factor")
   final double splitFactor;
   final double dividend;

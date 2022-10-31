@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
+import 'package:dartz/dartz.dart';
 import 'package:meta/meta.dart';
 
 import '../../../core/models/app_exception.dart';
@@ -13,8 +16,22 @@ class StockDetailsBloc extends Bloc<StockDetailsEvent, StockDetailsState> {
   StockDetailsBloc({
     required this.repository,
   }) : super(StockDetailsInitial()) {
-    on<StockDetailsEvent>((event, emit) {
-      // TODO: implement event handler
+    on<LoadStockDetails>((
+      LoadStockDetails event,
+      Emitter<StockDetailsState> emit,
+    ) async {
+      try {
+        emit(StockDetailsLoading());
+        final Either<AppException, StockDetails> response =
+            await repository.getStockDetails(event.stock);
+        response.fold(
+          (l) => emit(StockDetailsException(l)),
+          (r) => emit(StockDetailsLoaded(r)),
+        );
+      } catch (e, stacktrace) {
+        log(e.toString(), stackTrace: stacktrace);
+        emit(StockDetailsException(AppException(e.toString())));
+      }
     });
   }
 
