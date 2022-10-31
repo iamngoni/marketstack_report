@@ -59,7 +59,7 @@ AppException dioErrorToAppException(DioError error) {
       break;
     case DioErrorType.cancel:
       exception = AppException(
-        error.message,
+        "Failed to connect to the server, request was cancelled!",
         title: "Connection Cancelled",
       );
       break;
