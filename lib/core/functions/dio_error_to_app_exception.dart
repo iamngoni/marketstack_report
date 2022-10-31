@@ -65,7 +65,7 @@ AppException dioErrorToAppException(DioError error) {
       break;
     case DioErrorType.other:
       exception = AppException(
-        error.message,
+        "Failed to connect to the server, please check your internet 📡",
         title: "Request Error",
       );
       break;

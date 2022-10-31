@@ -5,6 +5,7 @@ import 'package:relative_scale/relative_scale.dart';
 import '../../../core/configs/app_colors.dart';
 import '../../../core/widgets/exports.dart';
 import '../../blocs/stocks/stocks_bloc.dart';
+import '../widgets/stocks_exception_widget.dart';
 import '../widgets/stocks_list_widget.dart';
 
 class MarketStackReportsPage extends StatelessWidget {
@@ -56,8 +57,8 @@ class MarketStackReportsPage extends StatelessWidget {
                       stocks: state.stocks,
                     );
                   } else if (state is StocksException) {
-                    stateWidget = const Center(
-                      child: Text("ERROR"),
+                    stateWidget = StocksExceptionWidget(
+                      exception: state.exception,
                     );
                   } else {
                     stateWidget = const SizedBox.shrink();
