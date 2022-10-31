@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:relative_scale/relative_scale.dart';
 
 import '../configs/app_colors.dart';

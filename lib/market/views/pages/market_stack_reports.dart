@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:relative_scale/relative_scale.dart';
 
 import '../../../core/configs/app_colors.dart';
+import '../../../core/widgets/exports.dart';
+import '../../blocs/stocks/stocks_bloc.dart';
+import '../widgets/stocks_list_widget.dart';
 
 class MarketStackReportsPage extends StatelessWidget {
   const MarketStackReportsPage({super.key});
@@ -38,6 +42,32 @@ class MarketStackReportsPage extends StatelessWidget {
               width: width,
               padding: EdgeInsets.symmetric(
                 horizontal: sx(20),
+              ),
+              child: BlocBuilder<StocksBloc, StocksState>(
+                builder: (context, state) {
+                  late Widget? stateWidget;
+
+                  if (state is StocksLoading) {
+                    stateWidget = const Center(
+                      child: Loader(),
+                    );
+                  } else if (state is StocksLoaded) {
+                    stateWidget = StocksListWidget(
+                      stocks: state.stocks,
+                    );
+                  } else if (state is StocksException) {
+                    stateWidget = const Center(
+                      child: Text("ERROR"),
+                    );
+                  } else {
+                    stateWidget = const SizedBox.shrink();
+                  }
+
+                  return AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 200),
+                    child: stateWidget,
+                  );
+                },
               ),
             ),
           ),
