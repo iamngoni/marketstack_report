@@ -1,4 +1,4 @@
-# Basalt Assessment
+# Basalt Assessment | Market Stack Report
 
 ![coverage][coverage_badge]
 [![style: very good analysis][very_good_analysis_badge]][very_good_analysis_link]
@@ -27,7 +27,15 @@ $ flutter run --flavor staging --target lib/main_staging.dart
 $ flutter run --flavor production --target lib/main_production.dart
 ```
 
-_\*Basalt Assessment works on iOS, Android, Web, and Windows._
+_\*Basalt Assessment works on iOS and Android, but was tested on Android._
+
+---
+
+## Generating Model Serializers
+
+```sh
+$ flutter pub run build_runner watch --delete-conflicting-outputs
+```
 
 ---
 
@@ -36,8 +44,35 @@ _\*Basalt Assessment works on iOS, Android, Web, and Windows._
 To run all unit and widget tests use the following command:
 
 ```sh
-$ flutter test --coverage --test-randomize-ordering-seed random
+$ flutter test --coverage
 ```
+
+---
+
+## Building Project
+
+To build the application use the following command:
+
+```sh
+# Android Split Packages
+$ flutter build apk --flavor production --target lib/main_production.dart --split-per-abi
+
+# Android Bundle
+$ flutter build appbundle --flavor production --target lib/main_production.dart
+
+# iOS
+$ flutter build ios --flavor production --target lib/main_production.dart
+```
+
+---
+
+## Screenshots
+
+## ![Screen 1](https://res.cloudinary.com/iamngoni/image/upload/v1667304175/Screenshot_1667301990_xo6wbz.png)
+
+![Screen](https://res.cloudinary.com/iamngoni/image/upload/v1667304188/Screenshot_1667301984_z5errp.png)
+
+---
 
 [coverage_badge]: coverage_badge.svg
 [flutter_localizations_link]: https://api.flutter.dev/flutter/flutter_localizations/flutter_localizations-library.html
