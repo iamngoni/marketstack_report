@@ -43,7 +43,9 @@ class StocksRepositoryImpl implements StocksRepository {
           "${ApiConfigs.baseUrl}/tickers/${stock.symbol.toLowerCase()}/eod?access_key=${ApiConfigs.apiKey}";
 
       if (to != null && from != null) {
-        url += "&date_from=$from&date_to=$to";
+        url +=
+            "&date_from=${from.year}-${from.month >= 10 ? from.month : '0${from.month}'}-${from.day >= 10 ? from.day : '0${from.day}'}"
+            "&date_to=${to.year}-${to.month >= 10 ? to.month : '0${to.month}'}-${to.day >= 10 ? to.day : '0${to.day}'}";
       }
 
       final Response<Map<String, dynamic>> response = await dio.get(url);

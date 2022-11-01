@@ -49,6 +49,11 @@ AppException dioErrorToAppException(DioError error) {
             title: "Not found",
           );
           break;
+        case 422:
+          exception = AppException(
+            "Validation Error",
+          );
+          break;
         case 500:
           exception = AppException(
             "Failed to process the request",

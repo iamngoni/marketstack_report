@@ -5,14 +5,18 @@ import 'package:relative_scale/relative_scale.dart';
 
 import '../../../core/configs/app_colors.dart';
 import '../../models/data/daily_data.dart';
+import '../../models/data/stock.dart';
 import '../../models/data/stock_details.dart';
+import 'date_filter_widget.dart';
 
 class StockDetailsWidget extends StatefulWidget {
   const StockDetailsWidget({
     super.key,
+    required this.stock,
     required this.details,
   });
 
+  final Stock stock;
   final StockDetails details;
 
   @override
@@ -96,6 +100,12 @@ class _StockDetailsWidgetState extends State<StockDetailsWidget> {
               ),
               const Divider(
                 color: AppColors.gray,
+              ),
+              DateFilterWidget(
+                stock: widget.stock,
+              ),
+              SizedBox(
+                height: sy(15),
               ),
               SizedBox(
                 width: width,

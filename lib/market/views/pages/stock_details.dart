@@ -72,8 +72,10 @@ class _StockDetailsPageState extends State<StockDetailsPage> {
                       child: Loader(),
                     );
                   } else if (state is StockDetailsLoaded) {
-                    stateWidget =
-                        StockDetailsWidget(details: state.stockDetails);
+                    stateWidget = StockDetailsWidget(
+                      details: state.stockDetails,
+                      stock: widget.stock,
+                    );
                   } else if (state is StockDetailsException) {
                     stateWidget = StockDetailsExceptionWidget(
                       exception: state.exception,
