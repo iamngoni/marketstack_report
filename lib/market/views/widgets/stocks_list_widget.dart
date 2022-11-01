@@ -22,7 +22,10 @@ class StocksListWidget extends StatelessWidget {
           width: width,
           child: Column(
             children: [
-              const AutoCompleteTextField(),
+              SizedBox(
+                height: sy(10),
+              ),
+              AutoCompleteTextField(),
               Expanded(
                 child: ListView.builder(
                   itemCount: stocks.length,

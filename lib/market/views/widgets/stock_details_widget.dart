@@ -22,21 +22,6 @@ class StockDetailsWidget extends StatefulWidget {
 class _StockDetailsWidgetState extends State<StockDetailsWidget> {
   String? selectedMonth;
 
-  final List<String> months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec"
-  ];
-
   List<String> getMonths() {
     final List<String> months = [];
 

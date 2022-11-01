@@ -46,9 +46,12 @@ class StocksBloc extends Bloc<StocksEvent, StocksState> {
               stock.name.toLowerCase().contains(event.query.toLowerCase()) ||
               stock.symbol.toLowerCase().contains(event.query.toLowerCase()))
           .toList();
-      final newState = (state as StocksLoaded).copyWith(filteredStocks);
-      log(newState.toString());
-      emit(newState);
+      emit(
+        StocksLoaded(
+          stocks: (state as StocksLoaded).stocks,
+          filteredList: filteredStocks,
+        ),
+      );
     } catch (e, stacktrace) {
       log(e.toString(), stackTrace: stacktrace);
       emit(StocksException(AppException(e.toString())));

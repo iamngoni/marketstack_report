@@ -21,6 +21,7 @@ class BasaltAssessment extends StatelessWidget {
         backgroundColor: AppColors.primary,
         fontFamily: "Inter",
       ),
+      themeMode: ThemeMode.dark,
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,

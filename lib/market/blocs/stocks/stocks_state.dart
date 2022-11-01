@@ -11,10 +11,6 @@ class StocksLoaded extends StocksState {
   StocksLoaded({required this.stocks, this.filteredList = const []});
   final List<Stock> stocks;
   final List<Stock> filteredList;
-
-  StocksLoaded copyWith(List<Stock> filtered) {
-    return StocksLoaded(stocks: stocks, filteredList: filteredList);
-  }
 }
 
 class StocksException extends StocksState {

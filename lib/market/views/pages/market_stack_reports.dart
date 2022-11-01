@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:relative_scale/relative_scale.dart';
@@ -55,8 +53,6 @@ class MarketStackReportsPage extends StatelessWidget {
                       child: Loader(),
                     );
                   } else if (state is StocksLoaded) {
-                    log("Filtered: ${state.filteredList.isNotEmpty}");
-                    // log("Using: ${state.filteredList.isEmpty ? state.stocks : state.filteredList}");
                     stateWidget = StocksListWidget(
                       stocks: state.filteredList.isEmpty
                           ? state.stocks
