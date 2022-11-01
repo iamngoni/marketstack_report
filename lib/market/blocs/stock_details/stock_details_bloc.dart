@@ -23,7 +23,12 @@ class StockDetailsBloc extends Bloc<StockDetailsEvent, StockDetailsState> {
       try {
         emit(StockDetailsLoading());
         final Either<AppException, StockDetails> response =
-            await repository.getStockDetails(event.stock);
+            await repository.getStockDetails(
+          event.stock,
+          from: event.from,
+          to: event.to,
+        );
+
         response.fold(
           (l) => emit(StockDetailsException(l)),
           (r) => emit(StockDetailsLoaded(r)),

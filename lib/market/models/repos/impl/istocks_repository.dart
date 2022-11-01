@@ -34,12 +34,19 @@ class StocksRepositoryImpl implements StocksRepository {
 
   @override
   Future<Either<AppException, StockDetails>> getStockDetails(
-    Stock stock,
-  ) async {
+    Stock stock, {
+    DateTime? from,
+    DateTime? to,
+  }) async {
     try {
-      final Response<Map<String, dynamic>> response = await dio.get(
-        "${ApiConfigs.baseUrl}/tickers/${stock.symbol.toLowerCase()}/eod?access_key=${ApiConfigs.apiKey}",
-      );
+      String url =
+          "${ApiConfigs.baseUrl}/tickers/${stock.symbol.toLowerCase()}/eod?access_key=${ApiConfigs.apiKey}";
+
+      if (to != null && from != null) {
+        url += "&date_from=$from&date_to=$to";
+      }
+
+      final Response<Map<String, dynamic>> response = await dio.get(url);
       final Map<String, dynamic> data = response.data!;
       final StockDetails stockDetails =
           StockDetails.fromJson(data["data"] as Map<String, dynamic>);

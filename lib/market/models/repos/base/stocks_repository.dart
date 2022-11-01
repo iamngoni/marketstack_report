@@ -6,5 +6,9 @@ import '../../data/stock_details.dart';
 
 abstract class StocksRepository {
   Future<Either<AppException, List<Stock>>> getStocks();
-  Future<Either<AppException, StockDetails>> getStockDetails(Stock stock);
+  Future<Either<AppException, StockDetails>> getStockDetails(
+    Stock stock, {
+    DateTime? from,
+    DateTime? to,
+  });
 }
