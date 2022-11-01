@@ -6,7 +6,7 @@ import '../../blocs/stocks/stocks_bloc.dart';
 import '../../models/data/stock.dart';
 
 class AutoCompleteTextField extends StatelessWidget {
-  AutoCompleteTextField({
+  const AutoCompleteTextField({
     super.key,
   });
 

@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:math' show Random;
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -21,7 +22,14 @@ class StocksRepositoryImpl implements StocksRepository {
       final List<Stock> stocks = (data["data"] as List)
           .map<Stock>((json) => Stock.fromJson(json as Map<String, dynamic>))
           .toList();
-      return Right(stocks);
+
+      final List<Stock> tenRandomStocks = [];
+      final Random random = Random();
+      for (int i = 0; i < 10; i++) {
+        tenRandomStocks.add(stocks[random.nextInt(stocks.length)]);
+      }
+
+      return Right(tenRandomStocks);
     } catch (e, stacktrace) {
       log(e.toString(), stackTrace: stacktrace);
       if (e is DioError) {
