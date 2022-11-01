@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:relative_scale/relative_scale.dart';
 
 import '../../models/data/stock.dart';
+import 'auto_complete_text_field.dart';
 import 'stock_container_widget.dart';
 
 class StocksListWidget extends StatelessWidget {
@@ -21,6 +22,7 @@ class StocksListWidget extends StatelessWidget {
           width: width,
           child: Column(
             children: [
+              const AutoCompleteTextField(),
               Expanded(
                 child: ListView.builder(
                   itemCount: stocks.length,

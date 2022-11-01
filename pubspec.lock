@@ -336,6 +336,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.0"
+  handy_extensions:
+    dependency: "direct main"
+    description:
+      name: handy_extensions
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.6+1"
   html:
     dependency: transitive
     description:
@@ -448,6 +455,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.0"
+  money_formatter:
+    dependency: transitive
+    description:
+      name: money_formatter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.3"
   nested:
     dependency: transitive
     description:
