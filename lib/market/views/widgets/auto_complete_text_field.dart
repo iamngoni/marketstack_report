@@ -21,23 +21,37 @@ class AutoCompleteTextField extends StatelessWidget {
               return state as StocksLoaded;
             },
             builder: (context, state) {
-              return Autocomplete(
-                optionsBuilder: (TextEditingValue textEditingValue) {
-                  if (textEditingValue.text.isEmpty) {
-                    return const Iterable<String>.empty();
-                  } else {
-                    final List<Stock> matches = state.stocks
-                      ..retainWhere((Stock stock) {
-                        return stock.name.toLowerCase().contains(
-                                  textEditingValue.text.toLowerCase(),
-                                ) ||
-                            stock.symbol
-                                .toLowerCase()
-                                .contains(textEditingValue.text.toLowerCase());
-                      });
-                    return matches.map((Stock stock) => stock.name).toList();
-                  }
-                },
+              return Row(
+                children: [
+                  const Icon(Icons.search, color: Colors.white),
+                  SizedBox(
+                    width: sx(10),
+                  ),
+                  Expanded(
+                    child: Autocomplete(
+                      optionsBuilder: (TextEditingValue textEditingValue) {
+                        BlocProvider.of<StocksBloc>(context)
+                            .add(FilterStocks(textEditingValue.text));
+                        if (textEditingValue.text.isEmpty) {
+                          return const Iterable<String>.empty();
+                        } else {
+                          final List<Stock> matches = [...state.stocks]
+                            ..retainWhere((Stock stock) {
+                              return stock.name.toLowerCase().contains(
+                                        textEditingValue.text.toLowerCase(),
+                                      ) ||
+                                  stock.symbol.toLowerCase().contains(
+                                        textEditingValue.text.toLowerCase(),
+                                      );
+                            });
+                          return matches
+                              .map((Stock stock) => stock.name)
+                              .toList();
+                        }
+                      },
+                    ),
+                  ),
+                ],
               );
             },
           ),

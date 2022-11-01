@@ -1,4 +1,4 @@
-import 'package:fl_chart/fl_chart.dart';
+import 'package:candlesticks/candlesticks.dart';
 import 'package:flutter/material.dart';
 import 'package:handy_extensions/handy_extensions.dart';
 import 'package:relative_scale/relative_scale.dart';
@@ -37,57 +37,57 @@ class _StockDetailsWidgetState extends State<StockDetailsWidget> {
     "Dec"
   ];
 
-  List<LineChartBarData> getLineChartBarData() {
-    final LineChartBarData highData = LineChartBarData(
-      spots: widget.details.eod.map<FlSpot>((DailyData dailyData) {
-        return FlSpot(dailyData.date.month.toDouble(), dailyData.high);
-      }).toList(),
-      color: AppColors.success,
-      barWidth: 3,
-      isStrokeCapRound: true,
-      dotData: FlDotData(
-        show: false,
-      ),
-    );
-
-    final LineChartBarData lowData = LineChartBarData(
-      spots: widget.details.eod.map<FlSpot>((DailyData dailyData) {
-        return FlSpot(dailyData.date.month.toDouble(), dailyData.low);
-      }).toList(),
-      color: AppColors.warning,
-      barWidth: 3,
-      isStrokeCapRound: true,
-      dotData: FlDotData(
-        show: false,
-      ),
-    );
-
-    final LineChartBarData openData = LineChartBarData(
-      spots: widget.details.eod.map<FlSpot>((DailyData dailyData) {
-        return FlSpot(dailyData.date.month.toDouble(), dailyData.open);
-      }).toList(),
-      color: AppColors.critical,
-      barWidth: 3,
-      isStrokeCapRound: true,
-      dotData: FlDotData(
-        show: false,
-      ),
-    );
-
-    final LineChartBarData closeData = LineChartBarData(
-      spots: widget.details.eod.map<FlSpot>((DailyData dailyData) {
-        return FlSpot(dailyData.date.month.toDouble(), dailyData.close);
-      }).toList(),
-      color: AppColors.interaction,
-      barWidth: 3,
-      isStrokeCapRound: true,
-      dotData: FlDotData(
-        show: false,
-      ),
-    );
-
-    return [highData, lowData, openData, closeData];
-  }
+  // List<LineChartBarData> getLineChartBarData() {
+  //   final LineChartBarData highData = LineChartBarData(
+  //     spots: widget.details.eod.map<FlSpot>((DailyData dailyData) {
+  //       return FlSpot(dailyData.date.month.toDouble(), dailyData.high);
+  //     }).toList(),
+  //     color: AppColors.success,
+  //     barWidth: 3,
+  //     isStrokeCapRound: true,
+  //     dotData: FlDotData(
+  //       show: false,
+  //     ),
+  //   );
+  //
+  //   final LineChartBarData lowData = LineChartBarData(
+  //     spots: widget.details.eod.map<FlSpot>((DailyData dailyData) {
+  //       return FlSpot(dailyData.date.month.toDouble(), dailyData.low);
+  //     }).toList(),
+  //     color: AppColors.warning,
+  //     barWidth: 3,
+  //     isStrokeCapRound: true,
+  //     dotData: FlDotData(
+  //       show: false,
+  //     ),
+  //   );
+  //
+  //   final LineChartBarData openData = LineChartBarData(
+  //     spots: widget.details.eod.map<FlSpot>((DailyData dailyData) {
+  //       return FlSpot(dailyData.date.month.toDouble(), dailyData.open);
+  //     }).toList(),
+  //     color: AppColors.critical,
+  //     barWidth: 3,
+  //     isStrokeCapRound: true,
+  //     dotData: FlDotData(
+  //       show: false,
+  //     ),
+  //   );
+  //
+  //   final LineChartBarData closeData = LineChartBarData(
+  //     spots: widget.details.eod.map<FlSpot>((DailyData dailyData) {
+  //       return FlSpot(dailyData.date.month.toDouble(), dailyData.close);
+  //     }).toList(),
+  //     color: AppColors.interaction,
+  //     barWidth: 3,
+  //     isStrokeCapRound: true,
+  //     dotData: FlDotData(
+  //       show: false,
+  //     ),
+  //   );
+  //
+  //   return [highData, lowData, openData, closeData];
+  // }
 
   List<String> getMonths() {
     final List<String> months = [];
@@ -99,6 +99,23 @@ class _StockDetailsWidgetState extends State<StockDetailsWidget> {
     final Set<String> monthsSet = months.toSet();
 
     return monthsSet.toList();
+  }
+
+  List<Candle> getCandles() {
+    final List<Candle> candles = widget.details.eod
+        .map(
+          (DailyData dailyData) => Candle(
+            date: dailyData.date,
+            close: dailyData.close,
+            high: dailyData.high,
+            low: dailyData.low,
+            open: dailyData.open,
+            volume: dailyData.volume,
+          ),
+        )
+        .toList();
+
+    return candles;
   }
 
   List<DailyData> filteredDailyData() {
@@ -150,202 +167,205 @@ class _StockDetailsWidgetState extends State<StockDetailsWidget> {
               const Divider(
                 color: AppColors.gray,
               ),
+              // SizedBox(
+              //   height: sy(10),
+              // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     Row(
+              //       children: [
+              //         Container(
+              //           height: sy(8),
+              //           width: sy(8),
+              //           decoration: const BoxDecoration(
+              //             color: AppColors.interaction,
+              //             shape: BoxShape.circle,
+              //           ),
+              //         ),
+              //         SizedBox(
+              //           width: sx(10),
+              //         ),
+              //         Text(
+              //           "Close",
+              //           style: TextStyle(
+              //             color: Colors.white,
+              //             fontWeight: FontWeight.w400,
+              //             fontSize: sy(9),
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //     SizedBox(
+              //       width: sx(10),
+              //     ),
+              //     Row(
+              //       children: [
+              //         Container(
+              //           height: sy(8),
+              //           width: sy(8),
+              //           decoration: const BoxDecoration(
+              //             color: AppColors.critical,
+              //             shape: BoxShape.circle,
+              //           ),
+              //         ),
+              //         SizedBox(
+              //           width: sx(10),
+              //         ),
+              //         Text(
+              //           "Open",
+              //           style: TextStyle(
+              //             color: Colors.white,
+              //             fontWeight: FontWeight.w400,
+              //             fontSize: sy(9),
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //     SizedBox(
+              //       width: sx(10),
+              //     ),
+              //     Row(
+              //       children: [
+              //         Container(
+              //           height: sy(8),
+              //           width: sy(8),
+              //           decoration: const BoxDecoration(
+              //             color: AppColors.success,
+              //             shape: BoxShape.circle,
+              //           ),
+              //         ),
+              //         SizedBox(
+              //           width: sx(10),
+              //         ),
+              //         Text(
+              //           "High",
+              //           style: TextStyle(
+              //             color: Colors.white,
+              //             fontWeight: FontWeight.w400,
+              //             fontSize: sy(9),
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //     SizedBox(
+              //       width: sx(10),
+              //     ),
+              //     Row(
+              //       children: [
+              //         Container(
+              //           height: sy(8),
+              //           width: sy(8),
+              //           decoration: const BoxDecoration(
+              //             color: AppColors.warning,
+              //             shape: BoxShape.circle,
+              //           ),
+              //         ),
+              //         SizedBox(
+              //           width: sx(10),
+              //         ),
+              //         Text(
+              //           "Low",
+              //           style: TextStyle(
+              //             color: Colors.white,
+              //             fontWeight: FontWeight.w400,
+              //             fontSize: sy(9),
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //   ],
+              // ),
               SizedBox(
                 height: sy(10),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        height: sy(8),
-                        width: sy(8),
-                        decoration: const BoxDecoration(
-                          color: AppColors.interaction,
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                      SizedBox(
-                        width: sx(10),
-                      ),
-                      Text(
-                        "Close",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w400,
-                          fontSize: sy(9),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    width: sx(10),
-                  ),
-                  Row(
-                    children: [
-                      Container(
-                        height: sy(8),
-                        width: sy(8),
-                        decoration: const BoxDecoration(
-                          color: AppColors.critical,
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                      SizedBox(
-                        width: sx(10),
-                      ),
-                      Text(
-                        "Open",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w400,
-                          fontSize: sy(9),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    width: sx(10),
-                  ),
-                  Row(
-                    children: [
-                      Container(
-                        height: sy(8),
-                        width: sy(8),
-                        decoration: const BoxDecoration(
-                          color: AppColors.success,
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                      SizedBox(
-                        width: sx(10),
-                      ),
-                      Text(
-                        "High",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w400,
-                          fontSize: sy(9),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    width: sx(10),
-                  ),
-                  Row(
-                    children: [
-                      Container(
-                        height: sy(8),
-                        width: sy(8),
-                        decoration: const BoxDecoration(
-                          color: AppColors.warning,
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                      SizedBox(
-                        width: sx(10),
-                      ),
-                      Text(
-                        "Low",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w400,
-                          fontSize: sy(9),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: sy(15),
               ),
               SizedBox(
                 width: width,
                 height: sy(150),
                 child: AspectRatio(
                   aspectRatio: 1,
-                  child: LineChart(
-                    LineChartData(
-                      lineBarsData: getLineChartBarData(),
-                      backgroundColor: Colors.black,
-                      gridData: FlGridData(
-                        drawHorizontalLine: true,
-                        drawVerticalLine: true,
-                      ),
-                      titlesData: FlTitlesData(
-                        show: true,
-                        leftTitles: AxisTitles(
-                          axisNameWidget: Text(
-                            "Amount",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700,
-                              fontSize: sy(10),
-                            ),
-                          ),
-                          sideTitles: SideTitles(
-                            showTitles: true,
-                            reservedSize: sx(70),
-                            getTitlesWidget:
-                                (double reservedSize, TitleMeta titleMeta) {
-                              return Padding(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: sx(10),
-                                ),
-                                child: Text(
-                                  titleMeta.formattedValue,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: sy(7),
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                        rightTitles: AxisTitles(
-                          sideTitles: SideTitles(
-                            showTitles: false,
-                          ),
-                        ),
-                        topTitles: AxisTitles(
-                          sideTitles: SideTitles(
-                            showTitles: false,
-                          ),
-                        ),
-                        bottomTitles: AxisTitles(
-                          axisNameWidget: Text(
-                            "Period (in months)",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700,
-                              fontSize: sy(10),
-                            ),
-                          ),
-                          sideTitles: SideTitles(
-                            showTitles: true,
-                            getTitlesWidget:
-                                (double reservedSize, TitleMeta titleMeta) {
-                              final int value =
-                                  double.parse(titleMeta.formattedValue)
-                                      .round();
-                              return Text(
-                                months[value],
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: sy(7),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      ),
-                    ),
+                  // child: LineChart(
+                  //   LineChartData(
+                  //     lineBarsData: getLineChartBarData(),
+                  //     backgroundColor: Colors.black,
+                  //     gridData: FlGridData(
+                  //       drawHorizontalLine: true,
+                  //       drawVerticalLine: true,
+                  //     ),
+                  //     titlesData: FlTitlesData(
+                  //       show: true,
+                  //       leftTitles: AxisTitles(
+                  //         axisNameWidget: Text(
+                  //           "Amount",
+                  //           style: TextStyle(
+                  //             color: Colors.white,
+                  //             fontWeight: FontWeight.w700,
+                  //             fontSize: sy(10),
+                  //           ),
+                  //         ),
+                  //         sideTitles: SideTitles(
+                  //           showTitles: true,
+                  //           reservedSize: sx(70),
+                  //           getTitlesWidget:
+                  //               (double reservedSize, TitleMeta titleMeta) {
+                  //             return Padding(
+                  //               padding: EdgeInsets.symmetric(
+                  //                 horizontal: sx(10),
+                  //               ),
+                  //               child: Text(
+                  //                 titleMeta.formattedValue,
+                  //                 style: TextStyle(
+                  //                   color: Colors.white,
+                  //                   fontWeight: FontWeight.w500,
+                  //                   fontSize: sy(7),
+                  //                 ),
+                  //               ),
+                  //             );
+                  //           },
+                  //         ),
+                  //       ),
+                  //       rightTitles: AxisTitles(
+                  //         sideTitles: SideTitles(
+                  //           showTitles: false,
+                  //         ),
+                  //       ),
+                  //       topTitles: AxisTitles(
+                  //         sideTitles: SideTitles(
+                  //           showTitles: false,
+                  //         ),
+                  //       ),
+                  //       bottomTitles: AxisTitles(
+                  //         axisNameWidget: Text(
+                  //           "Period (in months)",
+                  //           style: TextStyle(
+                  //             color: Colors.white,
+                  //             fontWeight: FontWeight.w700,
+                  //             fontSize: sy(10),
+                  //           ),
+                  //         ),
+                  //         sideTitles: SideTitles(
+                  //           showTitles: true,
+                  //           getTitlesWidget:
+                  //               (double reservedSize, TitleMeta titleMeta) {
+                  //             final int value =
+                  //                 double.parse(titleMeta.formattedValue)
+                  //                     .round();
+                  //             return Text(
+                  //               months[value],
+                  //               style: TextStyle(
+                  //                 color: Colors.white,
+                  //                 fontWeight: FontWeight.w500,
+                  //                 fontSize: sy(7),
+                  //               ),
+                  //             );
+                  //           },
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  child: Candlesticks(
+                    candles: getCandles(),
                   ),
                 ),
               ),

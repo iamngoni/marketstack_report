@@ -14,6 +14,7 @@ part 'stocks_state.dart';
 class StocksBloc extends Bloc<StocksEvent, StocksState> {
   StocksBloc({required this.repository}) : super(StocksInitial()) {
     on<LoadStocks>(_loadStocks);
+    on<FilterStocks>(_filterStocks);
   }
 
   Future<void> _loadStocks(
@@ -26,8 +27,28 @@ class StocksBloc extends Bloc<StocksEvent, StocksState> {
           await repository.getStocks();
       response.fold(
         (l) => emit(StocksException(l)),
-        (r) => emit(StocksLoaded(r)),
+        (r) => emit(StocksLoaded(stocks: r)),
       );
+    } catch (e, stacktrace) {
+      log(e.toString(), stackTrace: stacktrace);
+      emit(StocksException(AppException(e.toString())));
+    }
+  }
+
+  Future<void> _filterStocks(
+    FilterStocks event,
+    Emitter<StocksState> emit,
+  ) async {
+    try {
+      final List<Stock> filteredStocks = (state as StocksLoaded)
+          .stocks
+          .where((Stock stock) =>
+              stock.name.toLowerCase().contains(event.query.toLowerCase()) ||
+              stock.symbol.toLowerCase().contains(event.query.toLowerCase()))
+          .toList();
+      final newState = (state as StocksLoaded).copyWith(filteredStocks);
+      log(newState.toString());
+      emit(newState);
     } catch (e, stacktrace) {
       log(e.toString(), stackTrace: stacktrace);
       emit(StocksException(AppException(e.toString())));
