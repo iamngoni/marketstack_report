@@ -18,7 +18,7 @@ class BasaltAssessment extends StatelessWidget {
     cacheAssets(context);
     return MaterialApp(
       theme: ThemeData(
-        backgroundColor: AppColors.primary,
+        scaffoldBackgroundColor: AppColors.primary,
         fontFamily: "Inter",
       ),
       themeMode: ThemeMode.dark,

@@ -8,8 +8,8 @@ class StockExchange {
     required this.name,
     required this.acronym,
     required this.mic,
-    required this.country,
-    required this.countryCode,
+    this.country,
+    this.countryCode,
     required this.city,
     required this.website,
   });
@@ -20,9 +20,9 @@ class StockExchange {
   final String name;
   final String acronym;
   final String mic;
-  final String country;
+  final String? country;
   @JsonKey(name: "country_code")
-  final String countryCode;
+  final String? countryCode;
   final String city;
   final String website;
 }

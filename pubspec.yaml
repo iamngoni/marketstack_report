@@ -4,8 +4,13 @@ version: 1.0.0+1
 publish_to: none
 
 environment:
-  sdk: ">=2.18.0 <3.0.0"
-  flutter: 3.3.1
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.10.0"
+
+dependency_overrides:
+  file: ^7.0.0
+  watcher: ^1.1.0
+  pub_semver: ^2.2.0
 
 dependencies:
   bloc: ^8.1.0
@@ -21,19 +26,19 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   handy_extensions:
-  intl: ^0.17.0
+  intl: ^0.20.2
   json_annotation: ^4.6.0
   logger: ^1.1.0
   relative_scale: ^2.0.0
 
 dev_dependencies:
   bloc_test: ^9.1.0
-  build_runner: ^2.2.0
+  build_runner: ^2.4.0
   flutter_native_splash: ^2.2.7
   flutter_test:
     sdk: flutter
-  freezed: ^2.1.0+1
-  json_serializable: ^6.3.1
+  freezed: ^2.4.0
+  json_serializable: ^6.7.0
   mocktail: ^0.3.0
   very_good_analysis: ^3.1.0
 

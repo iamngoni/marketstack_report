@@ -1,6 +1,7 @@
 import 'package:candlesticks/candlesticks.dart';
 import 'package:flutter/material.dart';
 import 'package:handy_extensions/handy_extensions.dart';
+import 'package:intl/intl.dart';
 import 'package:relative_scale/relative_scale.dart';
 
 import '../../../core/configs/app_colors.dart';
@@ -8,6 +9,13 @@ import '../../models/data/daily_data.dart';
 import '../../models/data/stock.dart';
 import '../../models/data/stock_details.dart';
 import 'date_filter_widget.dart';
+
+extension MoneyFormat on double {
+  String get compactCurrency {
+    final formatter = NumberFormat.compactCurrency(symbol: '\$');
+    return formatter.format(this);
+  }
+}
 
 class StockDetailsWidget extends StatefulWidget {
   const StockDetailsWidget({
@@ -185,10 +193,10 @@ class _StockDetailsWidgetState extends State<StockDetailsWidget> {
                         ),
                       ),
                       subtitle: Text(
-                        "Open: ${dailyData.open.money.compactSymbolOnLeft} · "
-                        "Close: ${dailyData.close.money.compactSymbolOnLeft} · "
-                        "Low: ${dailyData.low.money.compactSymbolOnLeft} · "
-                        "High: ${dailyData.high.money.compactSymbolOnLeft}",
+                        "Open: ${dailyData.open.compactCurrency} · "
+                        "Close: ${dailyData.close.compactCurrency} · "
+                        "Low: ${dailyData.low.compactCurrency} · "
+                        "High: ${dailyData.high.compactCurrency}",
                         style: TextStyle(
                           color: Colors.white70,
                           fontWeight: FontWeight.w400,

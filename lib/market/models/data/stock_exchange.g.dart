@@ -11,8 +11,8 @@ StockExchange _$StockExchangeFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String,
       acronym: json['acronym'] as String,
       mic: json['mic'] as String,
-      country: json['country'] as String,
-      countryCode: json['country_code'] as String,
+      country: json['country'] as String?,
+      countryCode: json['country_code'] as String?,
       city: json['city'] as String,
       website: json['website'] as String,
     );
